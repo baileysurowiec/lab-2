@@ -8,12 +8,15 @@ function App() {
     {
       title: "Cleaning",
       content: " vaccuum",
-      author: "Bailey"
+      author: "Bailey",
+      dateCreated: (new Date().toUTCString())
     },
     {
       title: "Homework",
       content: " CSC 435 ",
-      author: "Bailey"
+      author: "Bailey",
+      dateCreated: (new Date().toUTCString())
+
     },
   ]
   const[user, setUser] = useState('');
@@ -21,11 +24,13 @@ function App() {
 
   return (
     <div>
-      <h1>To-do List</h1>
+      <h1 align = "center"> To-do List</h1>
+      
       <UserBar
       user = {user}
       setUser= {setUser}
       /> 
+      
       <TodoList
         todos= {todo}/>
         {user && 
@@ -33,6 +38,7 @@ function App() {
             user = {user}
             todos = {todo}
             setTodo = {setTodo}
+            dateCreated = {(new Date().toUTCString())}
           />}
   
     </div>

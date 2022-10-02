@@ -1,15 +1,16 @@
 import { useState } from "react";
 
-export default function CreateTodo({user, todos, setTodo}){
+export default function CreateTodo({user, todos, setTodo, dateCreated}){
     const[title, setTitle] = useState('');
     const[content, setContent] = useState('');
-    const[date, setDate] = useState()
+    // const[date, setDate] = useState('');
+    
 
     return(
         <form   onSubmit = {e=> {
             e.preventDefault();
             const newTodo = {
-                title, content, author: user
+                title, content, author: user, dateCreated
             };
             setTodo([newTodo,...todos])
         }}>
@@ -30,7 +31,9 @@ export default function CreateTodo({user, todos, setTodo}){
                 onChange = {(e)=> setContent(e.target.value)}
                 />
             <input  type = "submit"
-                    value = "Create" />
+                    value = "Create"
+                    // onChange={()=> setDate((new Date().toUTCString()))}
+                />
         </form>
     )
 }

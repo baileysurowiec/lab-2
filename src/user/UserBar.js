@@ -11,10 +11,10 @@ export default function UserBar({user, setUser}){
 
     else{
         return(
-            <>
+            <div align = "left">
             <Login  setUser = {setUser}/>
             <Register   setUser = {setUser}/>
-            </>
+            </div>
         )
     }
 }
