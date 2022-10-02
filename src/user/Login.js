@@ -1,8 +1,19 @@
-export default function Login(){
+import { useState } from "react";
+
+export default function Login({setUser}){
+    const[ username, setUsername] = useState('');
+
+    function handleUsername(e){ setUsername(e.target.value)}
+
+
     return(
-        <form       onSubmit = {e => e.preventDefault()}>
+        <form       onSubmit = {e => { e.preventDefault();
+                                        setUser(username);}
+            }>
             <label  htmlFor = "login-username"> Username: </label>
             <input  type = "text"
+                    value = {username}
+                    onChange = {handleUsername}
                     name = "login-username"
                     id = "login-username" 
                     />
@@ -13,6 +24,7 @@ export default function Login(){
                     />
             <input  type = "submit"
                     value = "Login"
+                    disabled = {username.length === 0}
                     />
         </form>
     )
