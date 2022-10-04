@@ -3,6 +3,8 @@ import TodoList from "./ToDo/TodoList";
 import { useState } from "react";
 import CreateTodo from "./ToDo/CreateTodo";
 import{v4 as uuidv4} from "uuid";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const myTodoList = [
@@ -35,7 +37,6 @@ function App() {
       user = {user}
       setUser= {setUser}
       /> 
-      
       <TodoList
         todos = {todo}/>
         {user && 
@@ -44,8 +45,7 @@ function App() {
             todos = {todo}
             setTodo = {setTodo}
             dateCreated = {((new Date(Date.now())).toString())}
-          />}
-  
+          />}  
     </div>
   );
 }

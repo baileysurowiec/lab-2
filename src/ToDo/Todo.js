@@ -6,20 +6,32 @@ export default function Todo({title, content, author, dateCreated, id}){
     const[dateComplete, setDateCompleted] = useState("");
     const[isComplete, setIsComplete] = useState(false);
 
-    const completeTodo = (e) => {
-        if(e.target.isComplete){
+    // function handleCompleteTodo(e){
+    //     setIsComplete(!isComplete)
+    //     if(e.target.isComplete){
+    //         setDateCompleted((new Date(Date.now())).toString())
+    //     }
+    //     else{
+    //         setDateCompleted(" still working ")
+    //     }
+    //     console.log(isComplete)
+    // }
+
+    function handleCompleteTodo(){
+        setIsComplete(!isComplete)
+        document.getElementById(id).checked = isComplete;
+        // console.log(isComplete)
+        if(isComplete){
             setDateCompleted((new Date(Date.now())).toString())
         }
         else{
-            setDateCompleted(" still working ")
+            setDateCompleted(" ")
         }
-        setIsComplete(!isComplete)
-        console.log(isComplete)
     }
 
     return(
         <div>
-            <h3>{title} </h3>
+            <h3 className = "display 3">{title} </h3>
             <div>{content}</div>
             <br/>
             <i>Created by <b>{author}</b> on {dateCreated}</i>
@@ -27,9 +39,9 @@ export default function Todo({title, content, author, dateCreated, id}){
             
             <input 
                 type="checkbox" 
-                value= {isComplete} 
-                id="flexCheckDefault"
-                onChange={completeTodo}
+                value = {isComplete} 
+                id={id}
+                onChange={handleCompleteTodo}
             />
             Date Completed: {dateComplete}
             </div>
