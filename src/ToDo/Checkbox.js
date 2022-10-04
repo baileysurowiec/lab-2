@@ -1,12 +1,14 @@
 
 export default function Checkbox(){
+
     return(
-    <div class="form-check">
+    <div className="form-check">
     <input 
-        class="form-check-input" 
+        className="form-check-input" 
         type="checkbox" 
         value= "" 
-        id="flexCheckDefault"/>
+        id="flexCheckDefault" 
+        />
     </div>
     )   
 }

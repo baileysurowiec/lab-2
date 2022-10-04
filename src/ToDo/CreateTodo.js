@@ -1,18 +1,19 @@
 import { useState } from "react";
+import{v4 as uuidv4} from "uuid";
 
-export default function CreateTodo({user, todos, setTodo, dateCreated}){
+
+export default function CreateTodo({user, todos, setTodo, dateCreated }){
     const[title, setTitle] = useState('');
     const[content, setContent] = useState('');
-    // const[date, setDate] = useState('');
-    
+
 
     return(
         <form   onSubmit = {e=> {
             e.preventDefault();
             const newTodo = {
-                title, content, author: user, dateCreated
+                title, content, author: user, dateCreated, id: uuidv4()
             };
-            setTodo([newTodo,...todos])
+            setTodo([newTodo,...todos]);
         }}>
             <div> Author: <b>{user}</b>
             </div>
@@ -32,7 +33,6 @@ export default function CreateTodo({user, todos, setTodo, dateCreated}){
                 />
             <input  type = "submit"
                     value = "Create"
-                    // onChange={()=> setDate((new Date().toUTCString()))}
                 />
         </form>
     )
