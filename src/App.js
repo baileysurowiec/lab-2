@@ -21,38 +21,25 @@ function App() {
       author: "Bailey",
       id: uuidv4()
 
-    },
+    }
   ]
   // const[user, setUser] = useState('');
-  const[ todo, setTodo] = useState(myTodoList);
+  // const[ todo, setTodo] = useState(myTodoList);
 
-  const [state, dispatch] = useReducer(appReducer, {
-    user: "",
-    // todos: myTodoList,
-  })
+  const[state, dispatch] = useReducer(appReducer, {
+    user:"", 
+    todos: myTodoList});
 
   return (
     <div>
-      <h1 align = "center"> To-do List</h1>
-      
-      <UserBar
-      user = {state.user}
-      dispatch = {dispatch}
-      /> 
-      <TodoList
-        todos = {todo} />
-        {state.user && <CreateTodo 
-          user = {state.user}
-          todos = {todo}
-          setTodo = {setTodo} 
-          /> 
-      }
-        {/* {state.user && 
-          <CreateTodo
-            user = {state.user}
-            todos = {state.todos}
-            dispatch = {dispatch}
-          />}   */}
+      <UserBar user={state.user} dispatch={dispatch} />
+      <TodoList todos={state.todos} />
+      {state.user && (
+        <CreateTodo 
+        user={state.user} 
+        todos={state.todos} 
+        dispatch={dispatch} />
+      )}
     </div>
   );
 }

@@ -7,17 +7,6 @@ export default function Todo({title, content, author, id}){
     const[isComplete, setIsComplete] = useState(false);
 
 
-    // function handleCompleteTodo(e){
-    //     setIsComplete(!isComplete)
-    //     if(e.target.isComplete){
-    //         setDateCompleted((new Date(Date.now())).toString())
-    //     }
-    //     else{
-    //         setDateCompleted(" still working ")
-    //     }
-    //     console.log(isComplete)
-    // }
-
     function handleCompleteTodo(){
         setIsComplete(!isComplete)
         document.getElementById(id).checked = isComplete;
@@ -40,7 +29,7 @@ export default function Todo({title, content, author, id}){
             
             <input 
                 type="checkbox" 
-                value = {isComplete} 
+                value = {false} 
                 id={id}
                 onChange={handleCompleteTodo}
             />
