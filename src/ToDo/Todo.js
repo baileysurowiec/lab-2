@@ -1,10 +1,11 @@
 import { useState } from "react";
-import{v4 as uuidv4} from "uuid";
 
+const dateCreated = new Date(Date.now()).toString();
 
-export default function Todo({title, content, author, dateCreated, id}){
+export default function Todo({title, content, author, id}){
     const[dateComplete, setDateCompleted] = useState("");
     const[isComplete, setIsComplete] = useState(false);
+
 
     // function handleCompleteTodo(e){
     //     setIsComplete(!isComplete)

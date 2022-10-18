@@ -20,8 +20,9 @@
                     id: action.id
                 };
                 return[newTodo,...state];
-            case "DELETE_TODO":
-            case "TOGGLE_TODO":
+            // case "TOGGLE_TODO":
+            // case "DELETE_TODO":
+            
             default:
                 return state;
         }

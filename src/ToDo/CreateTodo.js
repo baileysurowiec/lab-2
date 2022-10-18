@@ -2,21 +2,27 @@ import { useState } from "react";
 import{v4 as uuidv4} from "uuid";
 
 
-export default function CreateTodo({user, todos, dispatch, dateCreated }){
+export default function CreateTodo({user, todos, setTodo, dispatch }){
     const[title, setTitle] = useState('');
     const[content, setContent] = useState('');
 
 
     return(
-        <form   onSubmit = {e=> {
+        <form
+        onSubmit = {e=> {
             e.preventDefault();
-            dispatch({
-                type: "CREATE_TODO",
-                title,
-                content,
-                author: user,
-                dateCreated
-            });
+            const newTodo = {
+                title, content, author: user, id: uuidv4()
+            };
+            setTodo([newTodo,...todos]);
+
+            // dispatch({
+            //     type: "CREATE_TODO",
+            //     title,
+            //     content,
+            //     author: user,
+            //     id: uuidv4(),
+            // });
         }}>
             <div> Author: <b>{user}</b>
             </div>
