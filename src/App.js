@@ -13,18 +13,17 @@ function App() {
       title: "Cleaning",
       content: "vaccuum",
       author: "Bailey",
-      id: uuidv4()
+      id: uuidv4(),
+      dateCreated: ((new Date(Date.now())).toString()),
     },
     {
       title: "Homework",
       content: " CSC 435 ",
       author: "Bailey",
-      id: uuidv4()
-
+      id: uuidv4(),
+      dateCreated: ((new Date(Date.now())).toString()),
     }
   ]
-  // const[user, setUser] = useState('');
-  // const[ todo, setTodo] = useState(myTodoList);
 
   const[state, dispatch] = useReducer(appReducer, {
     user:"", 
@@ -38,7 +37,8 @@ function App() {
         <CreateTodo 
         user={state.user} 
         todos={state.todos} 
-        dispatch={dispatch} />
+        dispatch={dispatch} 
+        />
       )}
     </div>
   );

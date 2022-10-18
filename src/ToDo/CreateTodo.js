@@ -11,10 +11,6 @@ export default function CreateTodo({user, todos, dispatch }){
         <form
         onSubmit = {e=> {
             e.preventDefault();
-            // const newTodo = {
-            //     title, content, author: user, id: uuidv4()
-            // };
-            // setTodo([newTodo,...todos]);
 
             dispatch({
                 type: "CREATE_TODO",
@@ -22,6 +18,7 @@ export default function CreateTodo({user, todos, dispatch }){
                 content,
                 author: user,
                 id: uuidv4(),
+                dateCreated: ((new Date(Date.now())).toString()),
             });
         }}>
             <div> Author: <b>{user}</b>

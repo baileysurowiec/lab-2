@@ -1,11 +1,8 @@
 import { useState } from "react";
 
-const dateCreated = new Date(Date.now()).toString();
-
-export default function Todo({title, content, author, id}){
+export default function Todo({title, content, author, id, dateCreated}){
     const[dateComplete, setDateCompleted] = useState("");
     const[isComplete, setIsComplete] = useState(false);
-
 
     function handleCompleteTodo(){
         setIsComplete(!isComplete)
