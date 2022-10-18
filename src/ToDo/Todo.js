@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Todo({title, content, author, id, dateCreated}){
+export default function Todo({title, content, author, id, dateCreated, dispatch}){
     const[dateComplete, setDateCompleted] = useState("");
     const[isComplete, setIsComplete] = useState(false);
 
@@ -23,7 +23,6 @@ export default function Todo({title, content, author, id, dateCreated}){
             <br/>
             <i>Created by <b>{author}</b> on {dateCreated}</i>
             <div>
-            
             <input 
                 type="checkbox" 
                 value = {false} 
@@ -31,6 +30,16 @@ export default function Todo({title, content, author, id, dateCreated}){
                 onChange={handleCompleteTodo}
             />
             Date Completed: {dateComplete}
+            <br/>
+            <input 
+                type="submit" 
+                value="Delete" 
+                onClick={e => { 
+                    e.preventDefault(); 
+                    // console.log("deleted");
+                    dispatch({ type: "DELETE_TODO", id}); }}
+                />
+            <br/>
             </div>
         </div>
     )

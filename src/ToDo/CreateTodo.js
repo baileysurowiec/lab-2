@@ -19,6 +19,7 @@ export default function CreateTodo({user, todos, dispatch }){
                 author: user,
                 id: uuidv4(),
                 dateCreated: ((new Date(Date.now())).toString()),
+                dispatch,
             });
         }}>
             <div> Author: <b>{user}</b>

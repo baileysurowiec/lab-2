@@ -19,8 +19,11 @@ function todoReducer(state, action) {
         author: action.author,
         id: action.id,
         dateCreated: action.dateCreated,
+        dispatch: action.dispatch,
       };
       return [newTodo, ...state];
+    case "DELETE_TODO":
+      return state.filter(deleteItem => deleteItem.id !== action.id);
     default:
       return state;
   }
