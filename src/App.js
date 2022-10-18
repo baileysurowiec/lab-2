@@ -1,16 +1,17 @@
 import UserBar from "./user/UserBar";
 import TodoList from "./ToDo/TodoList";
-import { useState } from "react";
 import CreateTodo from "./ToDo/CreateTodo";
 import{v4 as uuidv4} from "uuid";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, {useState, useReducer} from "react";
+import appReducer from "./Reducers";
 
 
 function App() {
   const myTodoList = [
     {
       title: "Cleaning",
-      content: " vaccuum",
+      content: "vaccuum",
       author: "Bailey",
       dateCreated: ((new Date(Date.now())).toString()),
       isComplete: (false),
@@ -26,24 +27,29 @@ function App() {
 
     },
   ]
-  const[user, setUser] = useState('');
-  const[ todo, setTodo] = useState(myTodoList);
+  // const[user, setUser] = useState('');
+  // const[ todo, setTodo] = useState(myTodoList);
+
+  const [state, dispatch] = useReducer(appReducer, {
+    user: "",
+    todos: myTodoList,
+  })
 
   return (
     <div>
       <h1 align = "center"> To-do List</h1>
       
       <UserBar
-      user = {user}
-      setUser= {setUser}
+      user = {state.user}
+      dispatch = {dispatch}
       /> 
       <TodoList
-        todos = {todo}/>
-        {user && 
+        todos = {state.todos}/>
+        {state.user && 
           <CreateTodo
-            user = {user}
-            todos = {todo}
-            setTodo = {setTodo}
+            user = {state.user}
+            todos = {state.todos}
+            dispatch = {dispatch}
             dateCreated = {((new Date(Date.now())).toString())}
           />}  
     </div>

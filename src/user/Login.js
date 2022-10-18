@@ -1,19 +1,18 @@
 import { useState } from "react";
 
-export default function Login({setUser}){
+export default function Login({dispatch}){
     const[ username, setUsername] = useState('');
 
-    function handleUsername(e){ setUsername(e.target.value)}
-
+//     function handleUsername(e){ setUsername(e.target.value)}
 
     return(
         <form       onSubmit = {e => { e.preventDefault();
-                                        setUser(username);}
+                                        dispatch({type: "LOGIN", username});}
             }>
             <label  htmlFor = "login-username"> Username: </label>
             <input  type = "text"
                     value = {username}
-                    onChange = {handleUsername}
+                    onChange = {(event)=> setUsername(event.target.value)}
                     name = "login-username"
                     id = "login-username" 
                     />
