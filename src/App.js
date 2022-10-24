@@ -9,20 +9,7 @@ import appReducer from "./Reducers";
 
 function App() {
   const myTodoList = [
-    {
-      title: "Cleaning",
-      content: "vaccuum",
-      author: "Bailey",
-      id: uuidv4(),
-      dateCreated: ((new Date(Date.now())).toString()),
-    },
-    {
-      title: "Homework",
-      content: " CSC 435 ",
-      author: "Bailey",
-      id: uuidv4(),
-      dateCreated: ((new Date(Date.now())).toString()),
-    }
+
   ]
 
   const[state, dispatch] = useReducer(appReducer, {
