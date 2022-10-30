@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { StateContext } from "../Components/Context";
 
-export default function Register({dispatch}){
+export default function Register(){
         const[ username, setUsername] = useState('');
         const[ password, setPassword] = useState('');
         const[ repeatPassword, setPasswordRepeat] = useState('');
@@ -9,8 +10,11 @@ export default function Register({dispatch}){
         function handlePassword(e) {setPassword(e.target.value)}
         function handlePasswordRepeat(e) {setPasswordRepeat(e.target.value)}
 
+        const{dispatch} = useContext(StateContext);
+
     return(
-        <form   onSubmit = { e => {e.preventDefault(); dispatch({type: "REGISTER", username});}}>
+        <form   onSubmit = { e => {e.preventDefault(); 
+                                    dispatch({type: "REGISTER", username});}}>
             <label  htmlFor="register-username"> Username: </label>
             <input
                 type = "text" 

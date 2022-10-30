@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { StateContext } from "../Components/Context";
 
-export default function Login({dispatch}){
+export default function Login(){
     const[ username, setUsername] = useState('');
-
-//     function handleUsername(e){ setUsername(e.target.value)}
+    const{dispatch} = useContext(StateContext);
 
     return(
-        <form       onSubmit = {e => { e.preventDefault();
-                                        dispatch({type: "LOGIN", username});}
+        <form onSubmit = {e => { 
+                e.preventDefault();
+                dispatch({type: "LOGIN", username});}
             }>
             <label  htmlFor = "login-username"> Username: </label>
             <input  type = "text"

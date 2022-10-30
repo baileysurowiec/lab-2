@@ -5,6 +5,7 @@ import{v4 as uuidv4} from "uuid";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {useState, useReducer} from "react";
 import appReducer from "./Reducers";
+import { StateContext } from "./Components/Context";
 
 
 function App() {
@@ -18,8 +19,9 @@ function App() {
 
   return (
     <div>
-      <UserBar user={state.user} dispatch={dispatch} />
-      <TodoList todos={state.todos} />
+      <StateContext.Provider value = {{state, dispatch}}>
+      <UserBar />
+      <TodoList />
       {state.user && (
         <CreateTodo 
         user={state.user} 
@@ -27,6 +29,7 @@ function App() {
         dispatch={dispatch} 
         />
       )}
+      </StateContext.Provider>
     </div>
   );
 }
