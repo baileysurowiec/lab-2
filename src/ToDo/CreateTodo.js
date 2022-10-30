@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import{v4 as uuidv4} from "uuid";
+import { StateContext } from "../Components/Context";
 
 
-export default function CreateTodo({user, todos, dispatch }){
+export default function CreateTodo(){
     const[title, setTitle] = useState("");
     const[content, setContent] = useState("");
+    const {state, dispatch} = useContext(StateContext);
+    const{user} = state;
 
 
     return(

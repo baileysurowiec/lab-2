@@ -24,9 +24,6 @@ function App() {
       <TodoList />
       {state.user && (
         <CreateTodo 
-        user={state.user} 
-        todos={state.todos} 
-        dispatch={dispatch} 
         />
       )}
       </StateContext.Provider>
