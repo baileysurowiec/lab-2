@@ -24,6 +24,8 @@ function todoReducer(state, action) {
         dateCompleted: ""
       };
       return [newTodo, ...state];
+    case "FETCH_TODOS":
+      return action.todos;
     case "DELETE_TODO":
       return state.filter(deleteItem => deleteItem.id !== action.id);
     case "TOGGLE_TODO":
