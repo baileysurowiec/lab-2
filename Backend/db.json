@@ -1,5 +1,27 @@
 {
-    "todos":[],
-    "users":[]
-
+  "todos": [
+    {
+      "title": "Homework",
+      "content": "CSC 435",
+      "author": "Bailey",
+      "id": "1",
+      "dateCreated": "10/31/22",
+      "dispatch": "",
+      "isComplete": "false",
+      "dateCompleted": ""
+    },
+    {
+      "title": "More todos",
+      "content": "lots to do",
+      "author": "Bailey",
+      "id": "Xta55mn"
+    }
+  ],
+  "users": [
+    {
+      "email": "olivier@mail.com",
+      "password": "$2a$10$iVarIrsi0TjXkqW/a/Nm4OfEP5S0UDgiSp.Mndq/CmS1YHIJtcb2m",
+      "id": 1
+    }
+  ]
 }
