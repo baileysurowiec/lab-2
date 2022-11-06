@@ -17,20 +17,21 @@ export default function Login(){
     function handlePassword(evt){
         setPassword(evt.target.value)
     }
-    useEffect(()=>{
-        if(user){
-                if(user?.data?.user){
-                        setLoginFailed(false);
-                        dispatch({type: "LOGIN", sername: user.data.user.email});
-                }else{
-                        setLoginFailed(true);
-                }    
+    useEffect(() => {
+        if (user?.data?.user) {
+          setLoginFailed(false);
+          dispatch({ type: "LOGIN", username: user.data.user.email });
         }
-    }, [user])
+        if (user?.error) {
+          console.log(user?.error);
+          setLoginFailed(true);
+        }
+      }, [user]);
 
     return(
         <>
-        {loginFailed && <span style = {{color: 'red'}}> Invalid username or password </span>}
+        {loginFailed && <span style = {{color: 'red'}}> 
+        Invalid username or password </span>}
         <form onSubmit = {e => { 
                 e.preventDefault();
                 login(username, password);
@@ -48,8 +49,8 @@ export default function Login(){
             <input  type = "password"
                     value = {password}
                     onChange = {handlePassword}
-                    name = "login-username"
-                    id = "login-username"
+                    name = "login-password"
+                    id = "login-password"
                     />
             <input  type = "submit"
                     value = "Login"

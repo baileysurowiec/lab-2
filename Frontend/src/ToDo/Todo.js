@@ -1,35 +1,58 @@
 import { useState } from "react";
+import { useResource } from "react-request-hook";
 
-export default function Todo({title, content, author, id, dateCreated, dispatch, isComplete, dateCompleted}){
+export default function Todo({title, content, author, id, dateCreated, 
+                              dispatch, isComplete, dateCompleted}){
     // const[dateComplete, setDateCompleted] = useState("");
     // const[isComplete, setIsComplete] = useState(false);
 
-    // function handleCompleteTodo(){
-    //     setIsComplete(!isComplete)
-    //     document.getElementById(id).checked = isComplete;
-    //     dispatch({type: "TOGGLE_TODO", id, isComplete});
-    //     // console.log(isComplete)
-    //     // if(isComplete){
-    //     //     setDateCompleted((new Date(Date.now())).toString())
-    //     // }
-    //     // else{
-    //     //     setDateCompleted(" ")
-    //     // }
-    // }
+    const[toUpdate, updateTodo] = useResource((title, content, author,
+      id, dateCreated, isComplete, dateCompleted)=>({
+        url: "/todos/" + id,
+        // use put to update not post
+        method: "PUT",
+        data:{ title, content, author, dateCreated, 
+              isComplete, dateCompleted}
+    }));
+
+    function toggleTodoItem(title, content, author, id, isComplete){
+      var newDateCompleted = (new Date(Date.now())).toString();
+      if(!isComplete){
+        dateCompleted = newDateCompleted;
+      }
+      else{
+        dateCompleted = "";
+      }
+      isComplete = !isComplete;
+      updateTodo(title, content, author, id, dateCreated, isComplete, dateCompleted);
+      dispatch({
+        type: "TOGGLE_TODO", 
+        id, 
+        isComplete, 
+        dateCompleted });
+    }
+
+    const[toDelete, deleteTodo] = useResource((id)=>({
+      url: "/todos/" + id,
+      method: "DELETE",
+      // data:
+    }));
 
     return(
         <div>
             <h3 className = "display 3">{title} </h3>
             <div>{content}</div>
             <br/>
-            <i>Created by <b>{author}</b> on {dateCreated}</i>
+            Created by <b>{author}</b> on <i>{dateCreated}</i>
             <div>
             <input 
-                type="checkbox" 
-                value={false} 
-                onChange={(event)=>{ 
-                    dispatch({type: "TOGGLE_TODO", id, status: event.target.checked})           
-    }}/>
+                type="checkbox"
+                value = {isComplete}
+                checked = {isComplete}
+                onChange={()=>{
+                  toggleTodoItem(title, content, author, id, dateCreated, isComplete); 
+                    // dispatch({type: "TOGGLE_TODO", id, status: event.target.checked})           
+                }} />
             Date Completed: {dateCompleted}
             <br/>
             <input 
@@ -38,9 +61,10 @@ export default function Todo({title, content, author, id, dateCreated, dispatch,
                 onClick={e => { 
                     e.preventDefault(); 
                     // console.log("deleted");
+                    deleteTodo(id);
                     dispatch({ type: "DELETE_TODO", id}); }}
                 />
-            <br/>
+            <br/><br/>
             </div>
         </div>
     )

@@ -3,15 +3,15 @@ import { StateContext } from "../Components/Context";
 import { useResource } from "react-request-hook";
 
 export default function Register(){
-        const[ username, setUsername] = useState('');
-        const[ password, setPassword] = useState('');
-        const[ repeatPassword, setPasswordRepeat] = useState('');
-
-        function handleUsername(e) {setUsername(e.target.value)}
-        function handlePassword(e) {setPassword(e.target.value)}
-        function handlePasswordRepeat(e) {setPasswordRepeat(e.target.value)}
+        const[ username, setUsername] = useState("");
+        const[ password, setPassword] = useState("");
+        const[ repeatPassword, setPasswordRepeat] = useState("");
 
         const{dispatch} = useContext(StateContext);
+
+        // function handleUsername(e) {setUsername(e.target.value)}
+        function handlePassword(e) {setPassword(e.target.value)}
+        function handlePasswordRepeat(e) {setPasswordRepeat(e.target.value)}
 
         const [user, register] = useResource((username, password) => ({
             url: "/users",
@@ -37,7 +37,7 @@ export default function Register(){
             <input
                 type = "text" 
                 value={username}
-                onChange = {handleUsername}
+                onChange = {(event) => setUsername(event.target.value)}
                 name = "register-username"
                 id = "register-username" />
             <label  htmlFor="register-password"> Password: </label>

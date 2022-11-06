@@ -12,34 +12,60 @@ export default function CreateTodo(){
     const {state, dispatch} = useContext(StateContext);
     const{user} = state;
 
-    const[todo, createTodo] = useResource(({title, content, author})=>({
+    const[todo, createTodo] = useResource(({title, content, author, 
+                                    id, dateCreated, isComplete})=>({
         url: "/todos",
         method:"post",
-        data:{title, content, author},
+        data:{title, content, author, 
+            id, dateCreated, isComplete},
     }));
 
-    useEffect(()=>{
-        if(todo?.data?.error){
-            setError(true)
+    useEffect(() => {
+        if(todo?.error){
+            setError(true);
         }
-    }, [todo]);
+        if (todo?.isLoading === false && todo?.data) {
+          dispatch({
+            type: "CREATE_TODO",
+            title: todo.data.title,
+            // content,
+            content: todo.data.content,
+            author: todo.data.author,
+            id: todo.data.id,
+            dateCreated: todo.data.dateCreated,
+            // dispatch: todo.data.dispatch,
+            isComplete: todo.data.isComplete,
+            // dateCompleted: todo.data.dateCompleted,
+          });
+        }
+      }, [todo]);
 
     return(
         <form
         onSubmit = {e=> {
             e.preventDefault();
-            createTodo({title, content, auther: user});
-            dispatch({
-                type: "CREATE_TODO",
-                title,
-                content,
-                author: user,
-                id: uuidv4(),
-                dateCreated: ((new Date(Date.now())).toString()),
-                dispatch,
-                isComplete: false,
-                dateCompleted: ""
-            });
+            const newID = uuidv4();
+            const newDate = ((new Date(Date.now())).toString())
+            createTodo({
+                title, 
+                content, 
+                author: user, 
+                id: newID, 
+                // dateCreated: ((new Date(Date.now())).toString()), 
+                dateCreated: newDate,
+                isComplete: false, });
+            // dispatch({
+            //     type: "CREATE_TODO",
+            //     title,
+            //     content,
+            //     author: user,
+            //     id: newID,
+            //     dateCreated: newDate,
+            //     // dateCreated: ((new Date(Date.now())).toString()),
+            //     // dispatch,
+            //     isComplete: false,
+            //     // dateCompleted: ""
+            // });
         }}>
             <div> Author: <b>{user}</b>
             </div>

@@ -19,9 +19,9 @@ function todoReducer(state, action) {
         author: action.author,
         id: action.id,
         dateCreated: action.dateCreated,
-        dispatch: action.dispatch,
-        isComplete: false,
-        dateCompleted: ""
+        // dispatch: action.dispatch,
+        // isComplete: false,
+        // dateCompleted: ""
       };
       return [newTodo, ...state];
       
@@ -32,6 +32,7 @@ function todoReducer(state, action) {
       return state.filter(deleteItem => deleteItem.id !== action.id);
     
       case "TOGGLE_TODO":
+
       // get index of completed todo
       const i = state.findIndex(todoItem => todoItem.id === action.id);
       // set toggle to that item
@@ -47,7 +48,7 @@ function todoReducer(state, action) {
           author: toToggle.author,
           id: toToggle.id,
           dateCreated: toToggle.dateCreated,
-          dispatch: toToggle.dispatch,
+          // dispatch: toToggle.dispatch,
           isComplete: true,
           dateCompleted: (new Date(Date.now())).toString(),
         }

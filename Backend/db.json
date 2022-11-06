@@ -1,30 +1,22 @@
 {
   "todos": [
     {
-      "title": "Homework",
-      "content": "CSC 435",
-      "author": "Bailey",
-      "id": "1",
-      "dateCreated": "10/31/22",
-      "dispatch": "",
-      "isComplete": "false",
-      "dateCompleted": ""
-    },
-    {
-      "title": "More todos",
-      "content": "lots to do",
-      "author": "Bailey",
-      "id": "Xta55mn"
+      "title": "hw",
+      "content": "csc 435",
+      "author": "test@test.net",
+      "dateCreated": "Sun Nov 06 2022 13:00:10 GMT-0600 (Central Standard Time)",
+      "isComplete": false,
+      "dateCompleted": "",
+      "id": "69e6cbc7-c9c8-4cd5-8a91-66b22bae7e2c"
     },
     {
       "title": "another one",
-      "content": "hw",
-      "id": "ONrIFSZ"
-    },
-    {
-      "title": "another one",
-      "content": "hw again",
-      "id": "5332x3k"
+      "content": "hw 2",
+      "author": "b@test.net",
+      "dateCreated": "Sun Nov 06 2022 13:06:56 GMT-0600 (Central Standard Time)",
+      "isComplete": false,
+      "dateCompleted": "",
+      "id": "bce3ad38-a7b3-4f51-9440-81aae1f4827b"
     }
   ],
   "users": [
@@ -32,6 +24,16 @@
       "email": "olivier@mail.com",
       "password": "$2a$10$iVarIrsi0TjXkqW/a/Nm4OfEP5S0UDgiSp.Mndq/CmS1YHIJtcb2m",
       "id": 1
+    },
+    {
+      "email": "bailey@me.com",
+      "password": "$2a$10$kjNa2PyrTy3ynWmDrwP6CeXrO97KWp0soV/s6CzSQ0o7fYfu/Zoiu",
+      "id": 2
+    },
+    {
+      "email": "b@test.net",
+      "password": "$2a$10$hhD5qAYDr3GfwnplLPEHAegaYWx7/vs3R8B1yLZdyWJMJ6cMqOuVa",
+      "id": 3
     }
   ]
 }

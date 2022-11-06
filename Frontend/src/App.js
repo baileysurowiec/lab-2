@@ -38,8 +38,7 @@ function App() {
       <UserBar />
       <TodoList />
       {state.user && (
-        <CreateTodo 
-        />
+        <CreateTodo/>
       )}
       </StateContext.Provider>
     </div>
