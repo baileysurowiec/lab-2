@@ -1,5 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { StateContext } from "../Components/Context";
+import { useResource } from "react-request-hook";
 
 export default function Register(){
         const[ username, setUsername] = useState('');
@@ -12,9 +13,26 @@ export default function Register(){
 
         const{dispatch} = useContext(StateContext);
 
-    return(
-        <form   onSubmit = { e => {e.preventDefault(); 
-                                    dispatch({type: "REGISTER", username});}}>
+        const [user, register] = useResource((username, password) => ({
+            url: "/users",
+            method: "post",
+            data: { email: username, password },
+          }));
+        
+          useEffect(() => {
+            if (user && user.data && user.data.user.email) {
+              //user.error === undefined
+              dispatch({ type: "REGISTER", username: user.data.user.email });
+            }
+          }, [user]);
+        
+          return (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                register(username, password);
+            // dispatch({type: "REGISTER", username});
+        }}>
             <label  htmlFor="register-username"> Username: </label>
             <input
                 type = "text" 
