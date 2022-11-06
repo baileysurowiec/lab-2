@@ -9,16 +9,22 @@ import { StateContext } from "./Components/Context";
 import {useEffect} from "react";
 import { useResource } from 'react-request-hook';
 
-
-
 function App() {
-  const myTodoList = [
-
-  ]
+  const myTodoList = []
 
   const[state, dispatch] = useReducer(appReducer, {
     user:"", 
     todos: myTodoList});
+
+  const {user} = state;
+
+  useEffect(() => {
+    if (user) {
+      document.title = `${user}’s Todo List`;
+    } else {
+      document.title = "A Todo List";
+    }
+  }, [user]);
 
   const [ todos, getTodos ] = useResource(() => ({
       url: '/todos',
