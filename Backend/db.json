@@ -2,21 +2,30 @@
   "todos": [
     {
       "title": "hw",
-      "content": "csc 435",
-      "author": "test@test.net",
-      "dateCreated": "Sun Nov 06 2022 13:00:10 GMT-0600 (Central Standard Time)",
+      "content": "csc345",
+      "author": "bailey@me.com",
+      "dateCreated": "Mon Nov 07 2022 19:49:24 GMT-0600 (Central Standard Time)",
       "isComplete": false,
       "dateCompleted": "",
-      "id": "69e6cbc7-c9c8-4cd5-8a91-66b22bae7e2c"
+      "id": 1
     },
     {
       "title": "another one",
-      "content": "hw 2",
-      "author": "b@test.net",
-      "dateCreated": "Sun Nov 06 2022 13:06:56 GMT-0600 (Central Standard Time)",
+      "content": "hw",
+      "author": "test5@test.net",
+      "dateCreated": "Mon Nov 07 2022 19:50:02 GMT-0600 (Central Standard Time)",
       "isComplete": false,
       "dateCompleted": "",
-      "id": "bce3ad38-a7b3-4f51-9440-81aae1f4827b"
+      "id": 3
+    },
+    {
+      "title": "another one",
+      "content": "cleaning\n",
+      "author": "test5@test.net",
+      "dateCreated": "Mon Nov 07 2022 19:50:51 GMT-0600 (Central Standard Time)",
+      "isComplete": false,
+      "dateCompleted": "",
+      "id": 4
     }
   ],
   "users": [
@@ -34,6 +43,11 @@
       "email": "b@test.net",
       "password": "$2a$10$hhD5qAYDr3GfwnplLPEHAegaYWx7/vs3R8B1yLZdyWJMJ6cMqOuVa",
       "id": 3
+    },
+    {
+      "email": "test5@test.net",
+      "password": "$2a$10$ZkjVA7ifbcC3qKfgyc0Imes4tjUKVuy1b5zWLlLZgYOdSGfC5Jlka",
+      "id": 4
     }
   ]
 }

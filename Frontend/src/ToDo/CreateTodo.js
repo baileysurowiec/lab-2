@@ -13,11 +13,11 @@ export default function CreateTodo(){
     const{user} = state;
 
     const[todo, createTodo] = useResource(({title, content, author, 
-                                    id, dateCreated, isComplete})=>({
+                                     dateCreated, isComplete})=>({
         url: "/todos",
         method:"post",
         data:{title, content, author, 
-            id, dateCreated, isComplete},
+            dateCreated, isComplete:false},
     }));
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function CreateTodo(){
             id: todo.data.id,
             dateCreated: todo.data.dateCreated,
             // dispatch: todo.data.dispatch,
-            isComplete: todo.data.isComplete,
+            isComplete: false,
             // dateCompleted: todo.data.dateCompleted,
           });
         }
@@ -44,13 +44,13 @@ export default function CreateTodo(){
         <form
         onSubmit = {e=> {
             e.preventDefault();
-            const newID = uuidv4();
+            // const newID = uuidv4();
             const newDate = ((new Date(Date.now())).toString())
             createTodo({
                 title, 
                 content, 
                 author: user, 
-                id: newID, 
+                // id: newID, 
                 // dateCreated: ((new Date(Date.now())).toString()), 
                 dateCreated: newDate,
                 isComplete: false, });

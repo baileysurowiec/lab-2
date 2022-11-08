@@ -32,7 +32,6 @@ function todoReducer(state, action) {
       return state.filter(deleteItem => deleteItem.id !== action.id);
     
       case "TOGGLE_TODO":
-
       // get index of completed todo
       const i = state.findIndex(todoItem => todoItem.id === action.id);
       // set toggle to that item
