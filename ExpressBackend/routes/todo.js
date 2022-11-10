@@ -1,9 +1,9 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 
-const Todo = require("../models/Todos");
+const Todo = require("../models/Todo");
 
-const privateKey = "secret";
+const privateKey = ``;
 
 const router = express.Router();
 
@@ -31,7 +31,7 @@ router.use(function (req, res, next) {
 // add put or patch handler for toggle todo
 router.post("/", async function (req, res) {
 	// create a new instance of todo model
-	const todo = new Todos({
+	const todo = new Todo({
         title: req.body.title,
         content: req.body.content,
 	    author: req.payload.id,
@@ -40,7 +40,7 @@ router.post("/", async function (req, res) {
 		.save()
 		.then((savedTodo) => {
 			return res.status(201).json({
-				id: savedTodo._id,
+				_id: savedTodo._id,
                 title: savedTodo.title,
                 content: savedTodo.content,
                 author: savedTodo.author,
@@ -52,7 +52,6 @@ router.post("/", async function (req, res) {
 });
 
 // get
-
 router.get("/", async function (req, res, next) {
     const todos = await Todo.find().where("author").equals(req.payload.id).exec();
     return res.status(200).json({ todos: todos });
