@@ -5,6 +5,7 @@ const Todo = require("../models/Todo");
 
 const privateKey = ``;
 
+
 const router = express.Router();
 
 // route reguest through middleware function
@@ -16,6 +17,7 @@ router.use(function (req, res, next) {
 			req.payload = jwt.verify(req.header("Authorization"), privateKey, {
 				algorithms: ["RS256"],
 			});
+			console.log(req.payload);
 		} catch (error) {
 			return res.status(401).json({ error: error.message });
 		}

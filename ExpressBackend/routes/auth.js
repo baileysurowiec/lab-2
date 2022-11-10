@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User"); 
 
 const privateKey = ``;
+
 const saltRounds = 10;
 
 // hash and store password

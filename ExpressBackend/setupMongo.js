@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // insert correct uri 
-const uri = "";
+const uri ="";
 
 function connect(){
     const options = {useNewUrlParser: true};
