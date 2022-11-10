@@ -9,24 +9,41 @@ export default function Login(){
     const[password, setPassword] = useState("");
 
     const[user, login] = useResource((username, password)=>({
-        url: "/login",
+        // url: "/login",
+        url: "auth/login",
         method: "post",
-        data: {email: username, password},
+        // data: {email: username, password},
+        data: {username, password},
     }))
 
     function handlePassword(evt){
         setPassword(evt.target.value)
     }
     useEffect(() => {
-        if (user?.data?.user) {
-          setLoginFailed(false);
-          dispatch({ type: "LOGIN", username: user.data.user.email });
-        }
-        if (user?.error) {
-          console.log(user?.error);
-          setLoginFailed(true);
-        }
-      }, [user]);
+      if (user && user.isLoading === false && (user.data || user.error)) {
+      if (user.error) {
+        setLoginFailed(true);
+      } 
+      else {
+        setLoginFailed(false);
+        dispatch({
+          type: "LOGIN",
+          username: user.data.username,
+          access_token: user.data.access_token,
+        });
+      }}}, [user]);
+      
+
+    // useEffect(() => {
+    //     if (user?.data?.user) {
+    //       setLoginFailed(false);
+    //       dispatch({ type: "LOGIN", username: user.data.user.email });
+    //     }
+    //     if (user?.error) {
+    //       console.log(user?.error);
+    //       setLoginFailed(true);
+    //     }
+    //   }, [user]);
 
     return(
         <>

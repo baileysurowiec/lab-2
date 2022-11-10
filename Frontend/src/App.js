@@ -8,7 +8,7 @@ import appReducer from "./Reducers";
 import { StateContext } from "./Components/Context";
 import {useEffect} from "react";
 import { useResource } from 'react-request-hook';
-
+import Layout from "./pages/Layout";
 
 
 function App() {
@@ -18,14 +18,22 @@ function App() {
     user:"", 
     todos: myTodoList});
 
+    // const[state, dispatch] = useReducer(appReducer, {user: {}, todos: []});
+
   const [ todos, getTodos ] = useResource(() => ({
       url: '/todos',
-      method: 'get'
+      method: 'get',
+      // headers: {"Authorization": `${state?.user?.access_token}`},
     }))
 
  useEffect(getTodos, [])
+//  useEffect(()=>{
+//   getTodos();
+//  }, [state?.user?.access_token]);
 
  useEffect(() => {
+  // if(todos && todos.isLoading === false && todos.data){
+    // dispatch({type: "FETCH_TODOS", todos: todos.data.todos.reverse()});
         if (todos && todos.data) {
             dispatch({ type: 'FETCH_TODOS', todos: todos.data.reverse() })
         }
@@ -35,7 +43,8 @@ function App() {
   return (
     <div>
       <StateContext.Provider value = {{state, dispatch}}>
-      <UserBar />
+      {/* <UserBar /> */}
+      <Layout/>
       <TodoList />
       {state.user && (
         <CreateTodo/>

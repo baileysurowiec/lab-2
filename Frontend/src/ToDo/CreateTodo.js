@@ -15,6 +15,8 @@ export default function CreateTodo(){
                                      dateCreated, isComplete})=>({
         url: "/todos",
         method:"POST",
+        // headers: {"Authorization": `${state.user.access_token}`},
+        // data: {title, content}
         data:{title, content, author, 
             dateCreated, isComplete},
     }));
@@ -23,15 +25,17 @@ export default function CreateTodo(){
         if(todo?.error){
             setError(true);
         }
+        // if (todo.isLoading === false && todo.data){
         if (todo?.isLoading === false && todo?.data) {
           dispatch({
             type: "CREATE_TODO",
             title: todo.data.title,
             content: todo.data.content,
             author: todo.data.author,
+            // author: user.username
             id: todo.data.id,
             dateCreated: todo.data.dateCreated,
-            isComplete: false,
+            isComplete: todo.data.isComplete,
           });
         }
       }, [todo]);
@@ -48,7 +52,7 @@ export default function CreateTodo(){
                 dateCreated: newDate,
                 isComplete: false, });
         }}>
-            <div> Author: <b>{user}</b>
+            <div> Author: <b>{user.username}</b>
             </div>
             <div>
                 <label
