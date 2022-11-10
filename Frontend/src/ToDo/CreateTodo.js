@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useResource } from "react-request-hook";
-import{v4 as uuidv4} from "uuid";
 import { StateContext } from "../Components/Context";
 
 
@@ -15,9 +14,9 @@ export default function CreateTodo(){
     const[todo, createTodo] = useResource(({title, content, author, 
                                      dateCreated, isComplete})=>({
         url: "/todos",
-        method:"post",
+        method:"POST",
         data:{title, content, author, 
-            dateCreated, isComplete:false},
+            dateCreated, isComplete},
     }));
 
     useEffect(() => {
@@ -28,14 +27,11 @@ export default function CreateTodo(){
           dispatch({
             type: "CREATE_TODO",
             title: todo.data.title,
-            // content,
             content: todo.data.content,
             author: todo.data.author,
             id: todo.data.id,
             dateCreated: todo.data.dateCreated,
-            // dispatch: todo.data.dispatch,
             isComplete: false,
-            // dateCompleted: todo.data.dateCompleted,
           });
         }
       }, [todo]);
@@ -44,28 +40,13 @@ export default function CreateTodo(){
         <form
         onSubmit = {e=> {
             e.preventDefault();
-            // const newID = uuidv4();
             const newDate = ((new Date(Date.now())).toString())
             createTodo({
                 title, 
                 content, 
                 author: user, 
-                // id: newID, 
-                // dateCreated: ((new Date(Date.now())).toString()), 
                 dateCreated: newDate,
                 isComplete: false, });
-            // dispatch({
-            //     type: "CREATE_TODO",
-            //     title,
-            //     content,
-            //     author: user,
-            //     id: newID,
-            //     dateCreated: newDate,
-            //     // dateCreated: ((new Date(Date.now())).toString()),
-            //     // dispatch,
-            //     isComplete: false,
-            //     // dateCompleted: ""
-            // });
         }}>
             <div> Author: <b>{user}</b>
             </div>
