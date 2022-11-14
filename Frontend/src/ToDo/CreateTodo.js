@@ -25,7 +25,7 @@ export default function CreateTodo(){
             type: "CREATE_TODO",
             title: todo.data.title,
             content: todo.data.content,
-            id: todo.data.id,
+            id: todo.data._id,
             author: user.username,
             dateCreated: todo.data.dateCreated,
             isComplete: todo.data.isComplete
