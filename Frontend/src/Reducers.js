@@ -1,13 +1,11 @@
 function userReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
+    case "REGISTER":
       return{
         username: action.username,
         access_token: action.access_token,
-      };
-    case "REGISTER":
-      // add something here?
-      return action.username;
+      };      
     case "LOGOUT":
       return null;
     default:
@@ -24,9 +22,7 @@ function todoReducer(state, action) {
         author: action.author,
         id: action.id,
         dateCreated: action.dateCreated,
-        // dispatch: action.dispatch,
-        // isComplete: false,
-        // dateCompleted: ""
+        isComplete: action.isComplete,
       };
       return [newTodo, ...state];
       
@@ -39,42 +35,21 @@ function todoReducer(state, action) {
     case "DELETE_TODO":
       return state.filter(deleteItem => deleteItem.id !== action.id);
     
+      // needs to be fixed, redundent to toggletodoitem
+      // fixed and simplified
       case "TOGGLE_TODO":
-      // get index of completed todo
-      const i = state.findIndex(todoItem => todoItem.id === action.id);
-      // set toggle to that item
-      const toToggle = state[i];
-      // retieve remaining list
-      const start = state.slice(0, i);
-      const end = state.slice(i+1, state.length);
-      if(toToggle.isComplete === false){
-      // update toggled item
-         const toggleComplete = {
-          title: toToggle.title,
-          content: toToggle.content,
-          author: toToggle.author,
-          id: toToggle.id,
-          dateCreated: toToggle.dateCreated,
-          // dispatch: toToggle.dispatch,
-          isComplete: true,
-          dateCompleted: (new Date(Date.now())).toString(),
-        }
-        return [...start, toggleComplete, ...end];
-      }
-      else{
-        // undo complete
-         const toggleNotComplete = {
-          title: toToggle.title,
-          content: toToggle.content,
-          author: toToggle.author,
-          id: toToggle.id,
-          dateCreated: toToggle.dateCreated,
-          dispatch: toToggle.dispatch,
-          isComplete: false,
-          dateCompleted: "",
-        }
-        return [...start, toggleNotComplete, ...end];
-      }
+        return state.map((toToggle) => {
+          // look for todo with same id
+          if (toToggle.id === action.id) {
+            return {
+              // copy and update the new values
+              ...toToggle,
+              dateCompleted: action.dateCompleted,
+              complete: action.complete,
+            };
+          }
+          return toToggle;
+        });
       
     default:
       return state;

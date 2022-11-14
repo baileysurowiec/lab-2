@@ -15,20 +15,10 @@ export default function Register(){
         function handlePasswordRepeat(e) {setPasswordRepeat(e.target.value)}
 
         const [user, register] = useResource((username, password) => ({
-            // url: "/users",
             url: "auth/register",
             method: "post",
-            // data: { email: username, password },
             data: {username, password, passwordConfirmation: password},
           }));
-        
-          // useEffect(() => {
-          //   if (user && user.data && user.data.user.email) {
-          //     //user.error === undefined
-          //     dispatch({ type: "REGISTER", username: user.data.user.email });
-          //   }
-          // }, [user]);
-
 
           useEffect(()=>{
             if(user && user.isLoading === false && (user.data || user.error)){
@@ -46,7 +36,6 @@ export default function Register(){
               onSubmit={(e) => {
                 e.preventDefault();
                 register(username, password);
-            // dispatch({type: "REGISTER", username});
         }}>
             <label  htmlFor="register-username"> Username: </label>
             <input

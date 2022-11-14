@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useResource } from "react-request-hook";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Todo({title, content, author, id, dateCreated, 
+function Todo({title, content, author, id, _id, dateCreated, 
                               dispatch, isComplete, dateCompleted}){
-    // const[dateComplete, setDateCompleted] = useState("");
-    // const[isComplete, setIsComplete] = useState(false);
+
 
     const[toUpdate, updateTodo] = useResource((title, content, author,
       id, dateCreated, isComplete, dateCompleted)=>({
-        url: "/todos/" + id,
+        url: `/auth/todo/update/${id}`,
         // use put to update not post
         method: "PUT",
         data:{ title, content, author, dateCreated, 
@@ -33,14 +34,15 @@ export default function Todo({title, content, author, id, dateCreated,
     }
 
     const[toDelete, deleteTodo] = useResource((id)=>({
-      url: "/todos/" + id,
+      url: `/auth/todo/delete/${id}`,
       method: "DELETE",
-      // data:
     }));
 
     return(
         <div>
+          {/* <Link to={`/todo/${_id}`}> */}
             <h3 className = "display 3">{title} </h3>
+            {/* </Link> */}
             <div>{content}</div>
             <br/>
             Created by <b>{author}</b> on <i>{dateCreated}</i>
@@ -50,9 +52,9 @@ export default function Todo({title, content, author, id, dateCreated,
                 value = {isComplete}
                 checked = {isComplete}
                 onChange={()=>{
-                  toggleTodoItem(title, content, author, id, dateCreated, isComplete); 
-                    // dispatch({type: "TOGGLE_TODO", id, status: event.target.checked})           
-                }} />
+                  toggleTodoItem(title, content, author, id, dateCreated, isComplete);
+                }} 
+                />
             Date Completed: {dateCompleted}
             <br/>
             <input 
@@ -60,7 +62,6 @@ export default function Todo({title, content, author, id, dateCreated,
                 value="Delete" 
                 onClick={e => { 
                     e.preventDefault(); 
-                    // console.log("deleted");
                     deleteTodo(id);
                     dispatch({ type: "DELETE_TODO", id}); }}
                 />
@@ -69,3 +70,4 @@ export default function Todo({title, content, author, id, dateCreated,
         </div>
     )
 }
+export default React.memo(Todo);

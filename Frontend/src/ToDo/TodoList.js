@@ -7,12 +7,13 @@ export default function TodoList(){
     const{todos} = state;
     return(
         <div>
-            {todos.map((p, i) => (
-        <Todo {...p} key={p.id} dispatch ={dispatch}/>
+            {todos.map((p) => (
+                <Todo {...p} key={p.id} dispatch ={dispatch}/>
       ))}
-        <div> {todos.length ===0 && <h2>No todos found. </h2>}
-            {todos.length > 0 && todos.map((p, i)=> 
-                    <Todo {... p} key = {p._id || p.id} dispatch = {dispatch} />)}
+        <div> 
+            {todos.length === 0 && <h2> No todos found. </h2>}
+            {todos.length > 0 && todos.map((p)=> 
+                    <Todo {... p} key = {p._id} dispatch = {dispatch} />)}
         </div>
         </div>
     )

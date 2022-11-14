@@ -13,29 +13,22 @@ export default function CreateTodo(){
 
     const[todo, createTodo] = useResource(({title, content, author, 
                                      dateCreated, isComplete})=>({
-        url: "/todos",
+        url: "/todo",
         method:"POST",
-        // headers: {"Authorization": `${state.user.access_token}`},
-        // data: {title, content}
-        data:{title, content, author, 
-            dateCreated, isComplete},
+        headers: {"Authorization": `${state.user.access_token}`},
+        data: {title, content, dateCreated, isComplete}
     }));
 
     useEffect(() => {
-        if(todo?.error){
-            setError(true);
-        }
-        // if (todo.isLoading === false && todo.data){
-        if (todo?.isLoading === false && todo?.data) {
+        if (todo.isLoading === false && todo.data) {
           dispatch({
             type: "CREATE_TODO",
             title: todo.data.title,
             content: todo.data.content,
-            author: todo.data.author,
-            // author: user.username
             id: todo.data.id,
+            author: user.username,
             dateCreated: todo.data.dateCreated,
-            isComplete: todo.data.isComplete,
+            isComplete: todo.data.isComplete
           });
         }
       }, [todo]);
@@ -48,7 +41,7 @@ export default function CreateTodo(){
             createTodo({
                 title, 
                 content, 
-                author: user, 
+                author: user,
                 dateCreated: newDate,
                 isComplete: false, });
         }}>
