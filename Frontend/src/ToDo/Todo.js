@@ -17,7 +17,7 @@ function Todo({title, content, author, _id, dateCreated,
     }));
 
     function toggleTodoItem(title, content, author, _id, isComplete){
-      var newDateCompleted = (new Date(Date.now())).toString();
+      let newDateCompleted = (new Date(Date.now())).toString();
       if(!isComplete){
         dateCompleted = newDateCompleted;
       }

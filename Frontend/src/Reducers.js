@@ -20,7 +20,8 @@ function todoReducer(state, action) {
         title: action.title,
         content: action.content,
         author: action.author,
-        id: action.id,
+        // trying _id instead
+        id: action._id,
         dateCreated: action.dateCreated,
         isComplete: action.isComplete,
       };
