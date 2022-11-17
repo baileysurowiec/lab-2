@@ -4,7 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { StateContext } from "../Components/Context";
 
-function Todo({title, content, author, _id, id, dateCreated, 
+function Todo({title, content, author, _id, dateCreated, 
                 isComplete, dateCompleted}){
 
     const {state, dispatch} = useContext(StateContext);
@@ -73,7 +73,6 @@ function Todo({title, content, author, _id, id, dateCreated,
                     dispatch({ 
                       type: "DELETE_TODO", 
                       id:_id }
-                      // id,}
                       ); }}
                 />
             <br/><br/>
