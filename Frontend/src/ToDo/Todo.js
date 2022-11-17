@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useResource } from "react-request-hook";
 import React from "react";
 import { Link } from "react-router-dom";
+import { StateContext } from "../Components/Context";
 
 function Todo({title, content, author, _id, id, dateCreated, 
-                dispatch, isComplete, dateCompleted}){
+                isComplete, dateCompleted}){
+
+    const {state, dispatch} = useContext(StateContext);
 
 
     const[toUpdate, updateTodo] = useResource((title, content, author,
@@ -12,6 +15,7 @@ function Todo({title, content, author, _id, id, dateCreated,
         url: `/auth/todo/update/${_id}`,
         // use put to update not post
         method: "PUT",
+        headers: {"Authorization": `${state.user.access_token}`},
         data:{ title, content, author, dateCreated, 
               isComplete, dateCompleted}
     }));
@@ -38,6 +42,7 @@ function Todo({title, content, author, _id, id, dateCreated,
     const[toDelete, deleteTodo] = useResource((_id)=>({
       url: `/auth/todo/delete/${_id}`,
       method: "DELETE",
+      headers: {"Authorization": `${state.user.access_token}`}
     }));
 
     return(
