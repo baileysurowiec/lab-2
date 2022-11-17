@@ -3,8 +3,8 @@ import { useResource } from "react-request-hook";
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Todo({title, content, author, _id, dateCreated, 
-                              dispatch, isComplete, dateCompleted}){
+function Todo({title, content, author, _id, id, dateCreated, 
+                dispatch, isComplete, dateCompleted}){
 
 
     const[toUpdate, updateTodo] = useResource((title, content, author,
@@ -17,7 +17,7 @@ function Todo({title, content, author, _id, dateCreated,
     }));
 
     function toggleTodoItem(title, content, author, _id, isComplete){
-      let newDateCompleted = (new Date(Date.now())).toString();
+      let newDateCompleted = new Date(Date.now());
       if(!isComplete){
         dateCompleted = newDateCompleted;
       }
@@ -25,10 +25,12 @@ function Todo({title, content, author, _id, dateCreated,
         dateCompleted = "";
       }
       isComplete = !isComplete;
+      console.log(isComplete)
       updateTodo(title, content, author, _id, dateCreated, isComplete, dateCompleted);
       dispatch({
         type: "TOGGLE_TODO", 
         id: _id, 
+        // id,
         isComplete, 
         dateCompleted });
     }
@@ -63,7 +65,11 @@ function Todo({title, content, author, _id, dateCreated,
                 onClick={e => { 
                     e.preventDefault(); 
                     deleteTodo(_id);
-                    dispatch({ type: "DELETE_TODO", _id}); }}
+                    dispatch({ 
+                      type: "DELETE_TODO", 
+                      id:_id }
+                      // id,}
+                      ); }}
                 />
             <br/><br/>
             </div>

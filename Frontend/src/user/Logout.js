@@ -18,7 +18,10 @@ export default function Logout(){
             dispatch({type: "CLEAR_POSTS"});
             }}>
             <div align = "right">
-            Logged in as: <b>{user.username}</b>
+            Logged in as: <b>
+                {/* {user} */}
+                {user.username}
+                </b>
             <input  type = "submit"
                     value = "Logout" />
             </div>

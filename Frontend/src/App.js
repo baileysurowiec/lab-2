@@ -17,12 +17,24 @@ import Layout from "./pages/Layout";
 
 function App() {
   const myTodoList = []
+  const[state, dispatch] = useReducer(appReducer, {user: {}, todos: []});
 
-  const[state, dispatch] = useReducer(appReducer, {
-    user:"", 
-    todos: myTodoList});
+  // const[state, dispatch] = useReducer(appReducer, {
+  //   user:"", 
+  //   todos: myTodoList});
 
   const {user} = state;
+// const [ todos, getTodos ] = useResource(() => ({
+//   url: '/todos',
+//   method: 'get'
+// }))
+
+// useEffect(getTodos, [])
+// useEffect(() => {
+//   if (todos && todos.data) {
+//       dispatch({ type: 'FETCH_TODOS', todos: todos.data.reverse() })
+//   }
+// }, [todos])
 
   useEffect(() => {
     if (user) {
@@ -32,15 +44,13 @@ function App() {
     }
   }, [user]);
 
-  // const[state, dispatch] = useReducer(appReducer, {user: {}, todos: []});
-
   const [ todos, getTodos ] = useResource(() => ({
-      url: '/todo',
+      url: '/todo', //? '/auth/todo'
       method: 'get',
       headers: {"Authorization": `${state?.user?.access_token}`},
     }));
 
-//  useEffect(getTodos, [])
+
   useEffect(()=>{
       getTodos();
   }, [state?.user?.access_token]);
@@ -48,28 +58,26 @@ function App() {
  useEffect(() => {
   if(todos && todos.isLoading === false && todos.data){
     dispatch({type: "FETCH_TODOS", todos: todos.data.todos.reverse()});
-        // if (todos && todos.data) {
-        //     dispatch({ type: 'FETCH_TODOS', todos: todos.data.reverse() })
         }
  }, [todos])
 
-//  return (
-//   <div>
-//     <StateContext.Provider value={{ state, dispatch }}>
-//         <BrowserRouter>
-//           <Routes>
-//             <Route path="/" element={<Layout />}>
-//               <Route index element={<HomePage />} />
-//             </Route>
-//             <Route path="/todo" element={<Layout />}>
-//               <Route path="/todo/create" element={<CreateTodo />} />
-//               <Route path="/todo/:id" element={<TodoPage />} />
-//             </Route>
-//           </Routes>
-//         </BrowserRouter>
-//     </StateContext.Provider>
-//   </div>
-// );
+// //  return (
+// //   <div>
+// //     <StateContext.Provider value={{ state, dispatch }}>
+// //         <BrowserRouter>
+// //           <Routes>
+// //             <Route path="/" element={<Layout />}>
+// //               <Route index element={<HomePage />} />
+// //             </Route>
+// //             <Route path="/todo" element={<Layout />}>
+// //               <Route path="/todo/create" element={<CreateTodo />} />
+// //               <Route path="/todo/:id" element={<TodoPage />} />
+// //             </Route>
+// //           </Routes>
+// //         </BrowserRouter>
+// //     </StateContext.Provider>
+// //   </div>
+// // );
   
 return (
     <div>

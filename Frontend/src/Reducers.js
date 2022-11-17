@@ -2,6 +2,8 @@ function userReducer(state, action) {
   switch (action.type) {
     case "LOGIN":
     case "REGISTER":
+      // waterfall down
+      // returns for both login and register
       return{
         username: action.username,
         access_token: action.access_token,
@@ -21,7 +23,10 @@ function todoReducer(state, action) {
         content: action.content,
         author: action.author,
         // trying _id instead
-        id: action._id,
+        // id: action._id,
+
+        // dispatch casts _id to id
+        id: action.id,
         dateCreated: action.dateCreated,
         isComplete: action.isComplete,
       };
@@ -34,19 +39,19 @@ function todoReducer(state, action) {
       return [];
 
     case "DELETE_TODO":
-      return state.filter(deleteItem => deleteItem.id !== action.id);
+      return state.filter(deleteItem => deleteItem._id !== action.id);
     
       // needs to be fixed, redundent to toggletodoitem
       // fixed and simplified
       case "TOGGLE_TODO":
         return state.map((toToggle) => {
           // look for todo with same id
-          if (toToggle.id === action.id) {
+          if (toToggle._id === action.id) {
             return {
               // copy and update the new values
               ...toToggle,
               dateCompleted: action.dateCompleted,
-              complete: action.complete,
+              isComplete: action.isComplete,
             };
           }
           return toToggle;

@@ -14,11 +14,25 @@ export default function Login() {
     method: "post",
     data: { username, password },
   }));
+// const [user, login] = useResource((username, password) => ({
+//   url: "/login",
+//   method: "post",
+//   data: {email:username, password}
+// }));
 
   function handlePassword(evt) {
     setPassword(evt.target.value);
   }
-
+  // useEffect(() => {
+  //   if (user && user.data) {
+  //       if (user.data.accessToken) {
+  //           setLoginFailed(false)
+  //           dispatch({ type: 'LOGIN', username: user.data.user.email})
+  //       } else {
+  //           setLoginFailed(true)
+  //           }
+  //       }        
+  //   }, [user])
 
   useEffect(() => {
     if (user && user.isLoading === false && (user.data || user.error)) {

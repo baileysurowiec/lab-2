@@ -2,14 +2,37 @@ import { useContext, useEffect, useState } from "react";
 import { useResource } from "react-request-hook";
 import { StateContext } from "../Components/Context";
 
-
 export default function CreateTodo(){
     const[title, setTitle] = useState("");
     const[content, setContent] = useState("");
     const[error, setError] = useState(false);
 
     const {state, dispatch} = useContext(StateContext);
-    const{user} = state;
+    const {user} = state;
+
+
+// const [todo , createTodo ] = useResource(({ title, description, author, id, dateCreated, isComplete}) => ({
+//     url: '/todos',
+//     method: 'post',
+//     data: { title, description, author, id, dateCreated, isComplete}
+// }));
+
+// useEffect(() => {
+//     if(todo?.error){
+//         setError(true);
+//     }
+//     if (todo?.isLoading === false && todo?.data) {
+//               dispatch({
+//                 type: "CREATE_TODO",
+//                 title: todo.data.title,
+//                 content: todo.data.content,
+//                 id: todo.data.id, //_id ?
+//                 author: user.username,
+//                 dateCreated: todo.data.dateCreated,
+//                 isComplete: todo.data.isComplete
+//               });
+//             }
+//           }, [todo]);
 
     const[todo, createTodo] = useResource(({title, content, author, 
                                      dateCreated, isComplete})=>({
@@ -17,15 +40,19 @@ export default function CreateTodo(){
         method:"POST",
         headers: {"Authorization": `${state.user.access_token}`},
         data: {title, content, dateCreated, isComplete}
-    }));
+    }))
 
     useEffect(() => {
         if (todo.isLoading === false && todo.data) {
+            console.log(todo.data);
           dispatch({
             type: "CREATE_TODO",
             title: todo.data.title,
             content: todo.data.content,
+            // saved todo uses _id
+            // assign to id for dispatch
             id: todo.data._id,
+            // id: todo.data.id,
             author: user.username,
             dateCreated: todo.data.dateCreated,
             isComplete: todo.data.isComplete
@@ -37,7 +64,7 @@ export default function CreateTodo(){
         <form
         onSubmit = {e=> {
             e.preventDefault();
-            const newDate = ((new Date(Date.now())).toString())
+            const newDate = (new Date(Date.now()))
             createTodo({
                 title, 
                 content, 

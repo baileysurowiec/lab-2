@@ -14,6 +14,18 @@ export default function Register(){
         function handlePassword(e) {setPassword(e.target.value)}
         function handlePasswordRepeat(e) {setPasswordRepeat(e.target.value)}
 
+// const [ user, register ] = useResource((username, password) => ({
+//   url: '/users',
+//   method: 'post',
+//   data: { email:username, password }
+// }));
+
+// useEffect(() => {
+//   if (user && user.data && user.data.user.email) {
+//       dispatch({ type: 'REGISTER', username:user.data.user.email })
+//   }
+// }, [user]);
+
         const [user, register] = useResource((username, password) => ({
             url: "auth/register",
             method: "post",
