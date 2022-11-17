@@ -58,27 +58,43 @@ router.post("/", async function (req, res) {
 // get
 router.get("/", async function (req, res, next) {
     const todos = await Todo.find().where("author").equals(req.payload.id).exec();
+	// console.log(todos)
     return res.status(200).json({ todos: todos });
     });
 
 router.get("/:id", async function (req, res, next) {
 	const todo = await Todo.findOne().where("_id").equals(req.params.id).exec();
+	// console.log(todo)
 		return res.status(200).json(todo);
 	  });
 
 // add delete route handler
+// looking for the todo with the same id
 router.delete("/delete/:id", async function(req, res, next){
+	// deletes todo
 	const todo = await Todo.findOneAndDelete().where("_id").equals(req.params.id).exec();
-	console.log(todo);
+	if(todo){
 		return res.status(200).json(todo);
+	}
+	else{
+		return res.status(404).json({error: "Couldn't delete To-Do. "});}
 });
 
 
 // add put for toggle todo
 router.put("/update/:id", async function(req, res){
-	const todo = await Todo.findOneAndUpdate().where("_id").equals(req.params.id).exec();
-	// update isComplete and date completed here
+	// look for todo by id
+	const todo = await Todo.findByIdAndUpdate().where("_id").equals(req.params.id).exec();
+	// update isComplete and dateCompleted
+	if(todo){
+		todo.isComplete = req.body.isComplete,
+		todo.dateCompleted = req.body.dateCompleted
+		todo.save(); // need to save the changes
 		return res.status(200).json(todo);
+	}
+	else{
+		return res.status(409).json({error: "Couldn't update To-Do."});
+	}	
 });
 
 // export
