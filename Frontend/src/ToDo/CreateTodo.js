@@ -10,30 +10,6 @@ export default function CreateTodo(){
     const {state, dispatch} = useContext(StateContext);
     const {user} = state;
 
-
-// const [todo , createTodo ] = useResource(({ title, description, author, id, dateCreated, isComplete}) => ({
-//     url: '/todos',
-//     method: 'post',
-//     data: { title, description, author, id, dateCreated, isComplete}
-// }));
-
-// useEffect(() => {
-//     if(todo?.error){
-//         setError(true);
-//     }
-//     if (todo?.isLoading === false && todo?.data) {
-//               dispatch({
-//                 type: "CREATE_TODO",
-//                 title: todo.data.title,
-//                 content: todo.data.content,
-//                 id: todo.data.id, //_id ?
-//                 author: user.username,
-//                 dateCreated: todo.data.dateCreated,
-//                 isComplete: todo.data.isComplete
-//               });
-//             }
-//           }, [todo]);
-
     const[todo, createTodo] = useResource(({title, content, author, 
                                      dateCreated, isComplete})=>({
         url: "/todo",
@@ -52,7 +28,6 @@ export default function CreateTodo(){
             // saved todo uses _id
             // assign to id for dispatch
             id: todo.data._id,
-            // id: todo.data.id,
             author: user.username,
             dateCreated: todo.data.dateCreated,
             isComplete: todo.data.isComplete
@@ -64,7 +39,8 @@ export default function CreateTodo(){
         <form
         onSubmit = {e=> {
             e.preventDefault();
-            const newDate = (new Date(Date.now()))
+            const newDate = (new Date(Date.now()).toDateString())
+            console.log(newDate);
             createTodo({
                 title, 
                 content, 

@@ -34,7 +34,6 @@ function Todo({title, content, author, _id, dateCreated,
       dispatch({
         type: "TOGGLE_TODO", 
         id: _id, 
-        // id,
         isComplete, 
         dateCompleted });
     }
@@ -71,7 +70,7 @@ function Todo({title, content, author, _id, dateCreated,
                     e.preventDefault(); 
                     deleteTodo(_id);
                     dispatch({ 
-                      type: "DELETE_TODO", 
+                      type: "DELETE_TODO",
                       id:_id }
                       ); }}
                 />
