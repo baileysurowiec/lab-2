@@ -12,7 +12,7 @@ function Todo({title, content, author, _id, dateCreated,
 
     const[toUpdate, updateTodo] = useResource((title, content, author,
       _id, dateCreated, isComplete, dateCompleted)=>({
-        url: `/auth/todo/update/${_id}`,
+        url: `/todo/update/${_id}`,
         // use put to update not post
         method: "PUT",
         headers: {"Authorization": `${state.user.access_token}`},
@@ -20,8 +20,8 @@ function Todo({title, content, author, _id, dateCreated,
               isComplete, dateCompleted}
     }));
 
-    function toggleTodoItem(title, content, author, _id, isComplete){
-      let newDateCompleted = new Date(Date.now());
+    function toggleTodoItem(title, content, author, _id, dateCreated, isComplete){
+      let newDateCompleted = new Date(Date.now()).toDateString();
       if(!isComplete){
         dateCompleted = newDateCompleted;
       }
@@ -40,7 +40,7 @@ function Todo({title, content, author, _id, dateCreated,
     }
 
     const[toDelete, deleteTodo] = useResource((_id)=>({
-      url: `/auth/todo/delete/${_id}`,
+      url: `/todo/delete/${_id}`,
       method: "DELETE",
       headers: {"Authorization": `${state.user.access_token}`}
     }));
